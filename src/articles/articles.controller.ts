@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, BadRequestException } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 
 
@@ -20,7 +20,7 @@ export class ArticlesController {
     // Validate sortBy parameter
     const validSortByOptions = ['comments', 'points', 'postingDate'];
     if (!validSortByOptions.includes(sortBy as string)) {
-      return "Invalid sortBy parameter"
+      throw new BadRequestException('Invalid sortBy parameter');
     }
 
     let sortedArticles: any;
